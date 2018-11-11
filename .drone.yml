@@ -1,11 +1,19 @@
-pipeline:
-  build_friend:
+---
+kind: pipeline
+name: default
+
+steps:
+  - name: build_friend
     image: plugins/docker
-    repo: ktruckenmiller/ansible
-    secrets: [ docker_username, docker_password ]
-    tags:
-      - ${DRONE_COMMIT}
-      - latest
+    settings:
+      repo: ktruckenmiller/ansible
+      username:
+        from_secret: username
+      password:
+        from_secret: password
+      tags:
+        - ${DRONE_COMMIT}
+        - latest
     when:
       branch: [master]
       event: [push]
