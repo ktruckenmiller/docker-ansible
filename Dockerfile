@@ -1,8 +1,7 @@
 # pull base image
 FROM alpine:3.6
 
-RUN echo "===> Installing sudo to emulate normal OS behavior..."  && \
-    apk --update add sudo                                         && \
+RUN apk --update add sudo                                         && \
     echo "===> Adding Python runtime..."  && \
     apk --update add python py-pip openssl ca-certificates    && \
     apk --update add --virtual build-dependencies \
