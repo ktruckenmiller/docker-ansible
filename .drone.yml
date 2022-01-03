@@ -1,9 +1,13 @@
 ---
 kind: pipeline
-name: default
+name: ansible
+type: docker
+platform:
+  os: linux
+  arch: arm64
 
 steps:
-  - name: build_friend
+  - name: build-ansible
     image: plugins/docker
     settings:
       repo: ktruckenmiller/ansible
@@ -13,7 +17,7 @@ steps:
         from_secret: password
       tags:
         - ${DRONE_COMMIT}
-        - latest
+        - arm
     when:
       branch: [master]
       event: [push]
